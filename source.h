@@ -25,9 +25,10 @@ const int MAPSIZE_Y = 350;
 std::string map_str = "map.png";
 std::string elf_str = "pngegg (2).png";
 std::string mush_str = "mush.png";
+std::string vic_str = "victory.png";
+std::string defeat_str = "defeat.jpg";
 
-
-std::string TileMap[H] = {
+std::string TileMap2[H] = {
 
        "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
  
@@ -64,6 +65,45 @@ std::string TileMap[H] = {
        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
 
 }; 
+
+std::string TileMap[H] = {
+
+       "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+ 
+       "0                                                                          0                                                                           0",
+
+       "0                                                                          0                                                                 kkk     0",
+
+       "0                PPPP                                                      0   PPPP                    000                      000                  0",
+
+       "0                                                  PPP  PPP  PP            0                                                                         0",
+
+       "0  000                        PPPPPPPP                          00         0    kkkk    kwwwwk                        kw                  kwwwwk     0",
+
+       "0                                             PPPP                 rrrrrrr 0                                         rrr                             0",
+
+       "0                                                          00         rrrrr0 k0trPkkkk    k                         trPk            ttt              0",
+
+       "0       PPP                 rrr             PP                          rrr0                                  000                                    0",
+
+       "0                                                            OOO         rr0      kk                  00                                             0",
+
+       "0               rrr                                                       r0                                           r0                            0",
+
+       "0    rrr              r                0t0               00                0                     GGGGG                 r0                00          0",
+
+       "0PP                  rrr                                                   0           G                              rr0                            0",
+
+       "0PP                 rrrrr  ww    rr            rr     000     ww    rrrrrrr0             rrr                         rrr0                            0",
+
+       "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+
+       "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+
+       "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+
+};
+
 
 class Creature
 {
@@ -200,6 +240,7 @@ class Subject
 	sf::Font myFont;
 public: 
    std::list<std::shared_ptr<mushroom>> mush_list;
+   int PickedMushrooms = 0;
    
    Subject();
      virtual ~Subject() = default;
