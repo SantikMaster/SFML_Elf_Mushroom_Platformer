@@ -22,11 +22,11 @@ float offsetX = 0, offsetY = 0;
 const int MAPSIZE_X = 2200;		// start position
 const int MAPSIZE_Y = 350;
 
-std::string map_str = "map.png";
-std::string elf_str = "pngegg (2).png";
-std::string mush_str = "mush.png";
-std::string vic_str = "victory.png";
-std::string defeat_str = "defeat.jpg";
+std::string map_str = "../textures/map.png";
+std::string elf_str = "../textures/pngegg (2).png";
+std::string mush_str = "../textures/mush.png";
+std::string vic_str = "../textures/victory.png";
+std::string defeat_str = "../textures/defeat.jpg";
 
 std::string TileMap2[H] = {
 
@@ -137,7 +137,7 @@ public:
 	bool AI_LeftMove;
 
 	mushroom(const sf::Texture &image, Subject &sb,  float time);
-	~mushroom();
+	virtual ~mushroom();
 
 	void update(float time) override;
 	bool Collision()
@@ -254,7 +254,7 @@ public:
 	 }
      void Detach(Creature* o);
 
-     MoveObjects(float time)
+     void MoveObjects(float time)
      {
      	for (auto* o : observers)
 		{
@@ -311,7 +311,7 @@ public:
         }
      		
 	 }
- 	 DrawObjects(float time, sf::RenderWindow &sf_win)
+ 	 void DrawObjects(float time, sf::RenderWindow &sf_win)
  	 {
  	 	for (auto* o : observers) 
 		{

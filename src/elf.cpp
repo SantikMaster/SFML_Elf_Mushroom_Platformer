@@ -36,6 +36,7 @@ mushroom::mushroom(const sf::Texture &image, Subject &sb, float time = 0)
 }/*	*/	
 mushroom::~mushroom()
 {
+
 	sys->Detach(this);
 }
 elf::elf(const sf::Texture &image)
@@ -269,7 +270,7 @@ void DrawFont(sf::RenderWindow &sf_win, const sf::Texture &t)
 	
 
 }
-PlayerWin(bool Victory,sf::RenderWindow & sf_win, const sf::Texture &t, sf::Text &text)
+void PlayerWin(bool Victory,sf::RenderWindow & sf_win, const sf::Texture &t, sf::Text &text)
 {
 	sf_win.clear();
 	sf::RectangleShape rectangle(sf::Vector2f(1000,1000));
@@ -339,25 +340,44 @@ void DrawMap(sf::RenderWindow &sf_win, const sf::Texture &t)
 }
 void Subject::Detach(Creature* o)
 {
-    
-    mushroom *mush = dynamic_cast<mushroom*>(o);
-			
+	if (!o) return;
+    mushroom* mush = dynamic_cast<mushroom*>(o);
+	auto temp = observers.begin();
+	bool del = false;		
     if (mush) 
     {
-        	 //to EDIT // удалить из листа
-        for (auto &i:	mush_list )
-        {
-       		 if (i.get() == mush )
-         	{
-        		std::cout << "delete mushroom\n";
-				mush_list.remove(i);	
-		 	}
-    	}
-        // to edit;
+		
+			auto temp2 = mush_list.begin();
 			
-			 	
+			for (auto i = mush_list.begin(); i!=mush_list.end(); i++)
+			{
+				if ( (*i).get() == mush)
+				{
+					std::cout << "delete mushroom\n";
+					temp2 = i;
+					del = true;
+				}
+			}
+			if(del)
+				mush_list.erase(temp2);
+   
 	}
-	observers.remove(o);	
+
+
+	for (auto i = observers.begin(); i != observers.end(); i++)
+	{
+		if (*i == o)
+		{
+			std::cout << "delete observer var\n";
+			temp = i;
+		}
+	}
+	if(del)
+	observers.erase(temp);
+
+
+/*	observers.remove(o);	 */ 
+
 }
  	
 void Subject::CollideObjects(elf *Player)
@@ -434,7 +454,7 @@ void Subject::Print(int Mush_N, std::string Str, int line, sf::RenderWindow &sf_
 Subject::Subject()
 {
    	
-    std::string myfontFileName="Arial.ttf";
+    std::string myfontFileName="../textures/Arial.ttf";
     if (!myFont.loadFromFile(myfontFileName))
         {
         std::cout << "Could not find the font " << myfontFileName << std::endl;
@@ -457,7 +477,7 @@ int main()
 
 	sf::Text text;
 	sf::Font myFont;
-    std::string myfontFileName="Arial.ttf";
+    std::string myfontFileName="../textures/Arial.ttf";
     if (!myFont.loadFromFile(myfontFileName))
         {
         std::cout << "Could not find the font " << myfontFileName << std::endl;
